@@ -4,35 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    tools:context=".MainActivity">
 
 
     <EditText
         android:id="@+id/editTextPhone"
-        android:layout_width="258dp"
+        android:layout_width="236dp"
         android:layout_height="45dp"
+        android:layout_marginStart="1dp"
+        android:autofillHints=""
         android:background="@drawable/phone_num_input_box"
         android:ems="10"
         android:hint="@string/phone_number"
         android:inputType="phone"
         app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="@+id/button"
         app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.938"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.941" />
 
     <com.hbb20.CountryCodePicker
         android:id="@+id/countryCodePicker"
-        android:layout_width="97dp"
+        android:layout_width="120dp"
         android:layout_height="45dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="12dp"
         android:background="@drawable/code_input_box"
         app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/button"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.987" />
+        app:layout_constraintVertical_bias="0.941" />
 
     <Button
         android:id="@+id/button"
@@ -50,26 +50,28 @@
         android:id="@+id/button4"
         android:layout_width="354dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="224dp"
         android:background="@drawable/otp_button"
         android:text="@string/log_in"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/button5"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.366" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="164dp"
         android:layout_height="45dp"
-        android:layout_marginStart="28dp"
         android:background="@drawable/second_button"
         android:text="@string/google"
         android:textAlignment="center"
+        app:icon="@drawable/ic_google"
         app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/button"
         app:layout_constraintTop_toBottomOf="@+id/button"
         app:layout_constraintVertical_bias="0.755" />
+
 
     <Button
         android:id="@+id/button5"
@@ -78,8 +80,8 @@
         android:background="@drawable/second_button"
         android:text="@string/facebook"
         app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.418"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/button3"
         app:layout_constraintTop_toBottomOf="@+id/button"
         app:layout_constraintVertical_bias="0.767" />
@@ -88,13 +90,15 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:text="@string/or"
         android:textAlignment="center"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintStart_toEndOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="@+id/button"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.229" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,9 +12,9 @@
         android:topRightRadius="0dp" />
     <padding
         android:left="2dp"
-        android:bottom="6dp"
+        android:bottom="0dp"
         android:right="2dp"
-        android:top="6dp"/>
+        android:top="1dp"/>
 
 
 </shape>

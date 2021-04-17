@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1023612342958",
+    "project_id": "thermal-yeti-298401",
+    "storage_bucket": "thermal-yeti-298401.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023612342958:android:e0eb1092496d8018f5133f",
+        "android_client_info": {
+          "package_name": "com.example.farmsales"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023612342958-il0sbnajlsnp5khpnprlrqti6l7c4vf2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZsn4qGptrzmKpXLE76bV9lily6zKTWI0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023612342958-il0sbnajlsnp5khpnprlrqti6l7c4vf2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
