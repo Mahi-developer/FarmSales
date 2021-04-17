@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/background">
+
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="246dp"
+        android:layout_height="50dp"
+        android:background="@drawable/phone_num_input_box"
+        android:ems="10"
+        android:hint="Phone Number"
+        android:inputType="phone"
+        tools:layout_editor_absoluteX="131dp"
+        tools:layout_editor_absoluteY="271dp" />
+
+    <com.hbb20.CountryCodePicker
+        android:layout_width="97dp"
+        android:layout_height="50dp"
+        android:background="@drawable/code_input_box"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="271dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="343dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="348dp"
+        android:background="@drawable/otp_button"
+        android:text="Send OTP"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:text="Button"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="545dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
