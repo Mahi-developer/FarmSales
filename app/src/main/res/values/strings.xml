@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">FarmSales</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="facebook">Facebook</string>
+    <string name="google">Google</string>
+    <string name="or">OR</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="log_in">Log in</string>
 </resources>
