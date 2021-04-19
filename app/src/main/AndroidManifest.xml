@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FarmSales">
-        <activity android:name=".Verify_otp"></activity>
+        <activity android:name=".Home_page"></activity>
+        <activity android:name=".Verify_otp" />
         <activity android:name=".MainActivity2" />
         <activity android:name=".MainActivity">
             <intent-filter>
