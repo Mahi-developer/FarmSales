@@ -1,0 +1,264 @@
+<html>
+<head>
+<title>AndroidManifest.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #e8bf6a;}
+.s1 { color: #bababa;}
+.s2 { color: #6a8759;}
+.s3 { color: #a9b7c6;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+AndroidManifest.xml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;?</span><span class="s1">xml version</span><span class="s2">=&quot;1.0&quot; </span><span class="s1">encoding</span><span class="s2">=&quot;utf-8&quot;</span><span class="s0">?&gt;</span>
+<span class="s0">&lt;manifest </span><span class="s1">xmlns:android</span><span class="s2">=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="s1">package</span><span class="s2">=&quot;com.example.farmsales&quot;</span>
+    <span class="s1">android:versionCode</span><span class="s2">=&quot;1&quot;</span>
+    <span class="s1">android:versionName</span><span class="s2">=&quot;1.0&quot; </span><span class="s0">&gt;</span>
+
+    <span class="s0">&lt;uses-sdk</span>
+        <span class="s1">android:minSdkVersion</span><span class="s2">=&quot;21&quot;</span>
+        <span class="s1">android:targetSdkVersion</span><span class="s2">=&quot;30&quot; </span><span class="s0">/&gt;</span>
+
+    <span class="s0">&lt;uses-permission </span><span class="s1">android:name</span><span class="s2">=&quot;android.permission.INTERNET&quot; </span><span class="s0">/&gt;</span>
+    <span class="s0">&lt;uses-permission </span><span class="s1">android:name</span><span class="s2">=&quot;android.permission.READ_SMS&quot; </span><span class="s0">/&gt;</span>
+    <span class="s0">&lt;uses-permission </span><span class="s1">android:name</span><span class="s2">=&quot;android.permission.ACCESS_NETWORK_STATE&quot; </span><span class="s0">/&gt;</span>
+    <span class="s0">&lt;uses-permission </span><span class="s1">android:name</span><span class="s2">=&quot;android.permission.WAKE_LOCK&quot; </span><span class="s0">/&gt;</span>
+    <span class="s0">&lt;uses-permission </span><span class="s1">android:name</span><span class="s2">=&quot;com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE&quot; </span><span class="s0">/&gt;</span>
+
+    <span class="s0">&lt;application</span>
+        <span class="s1">android:allowBackup</span><span class="s2">=&quot;true&quot;</span>
+        <span class="s1">android:appComponentFactory</span><span class="s2">=&quot;androidx.core.app.CoreComponentFactory&quot;</span>
+        <span class="s1">android:debuggable</span><span class="s2">=&quot;true&quot;</span>
+        <span class="s1">android:icon</span><span class="s2">=&quot;@mipmap/ic_launcher&quot;</span>
+        <span class="s1">android:label</span><span class="s2">=&quot;@string/app_name&quot;</span>
+        <span class="s1">android:roundIcon</span><span class="s2">=&quot;@mipmap/ic_launcher_round&quot;</span>
+        <span class="s1">android:supportsRtl</span><span class="s2">=&quot;true&quot;</span>
+        <span class="s1">android:testOnly</span><span class="s2">=&quot;true&quot;</span>
+        <span class="s1">android:theme</span><span class="s2">=&quot;@style/Theme.FarmSales&quot; </span><span class="s0">&gt;</span>
+        <span class="s0">&lt;activity </span><span class="s1">android:name</span><span class="s2">=&quot;com.example.farmsales.MainActivity&quot; </span><span class="s0">&gt;</span>
+            <span class="s0">&lt;intent-filter&gt;</span>
+                <span class="s0">&lt;action </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.action.MAIN&quot; </span><span class="s0">/&gt;</span>
+
+                <span class="s0">&lt;category </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.category.LAUNCHER&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/intent-filter&gt;</span>
+        <span class="s0">&lt;/activity&gt;</span>
+
+        <span class="s0">&lt;meta-data</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.google.android.gms.version&quot;</span>
+            <span class="s1">android:value</span><span class="s2">=&quot;@integer/google_play_services_version&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;meta-data</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.facebook.sdk.ApplicationId&quot;</span>
+            <span class="s1">android:value</span><span class="s2">=&quot;@string/facebook_application_id&quot; </span><span class="s0">/&gt;</span>
+
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.firebase.ui.auth.KickoffActivity&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@style/FirebaseUI.Transparent&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.firebase.ui.auth.ui.idp.SingleSignInActivity&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@style/FirebaseUI.Transparent&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.firebase.ui.auth.ui.credentials.CredentialSaveActivity&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@style/FirebaseUI.Transparent&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.firebase.ui.auth.ui.email.RecoverPasswordActivity&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;@string/fui_title_recover_password_activity&quot;</span>
+            <span class="s1">android:windowSoftInputMode</span><span class="s2">=&quot;adjustResize&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.firebase.ui.auth.ui.email.EmailActivity&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;@string/fui_sign_in_default&quot;</span>
+            <span class="s1">android:windowSoftInputMode</span><span class="s2">=&quot;adjustResize&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.firebase.ui.auth.ui.phone.PhoneActivity&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;@string/fui_sign_in_with_phone_number&quot;</span>
+            <span class="s1">android:windowSoftInputMode</span><span class="s2">=&quot;adjustResize|stateAlwaysVisible&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.firebase.ui.auth.ui.idp.WelcomeBackIdpPrompt&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;@string/fui_title_welcome_back_idp_prompt&quot;</span>
+            <span class="s1">android:windowSoftInputMode</span><span class="s2">=&quot;adjustResize&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.firebase.ui.auth.ui.email.WelcomeBackPasswordPrompt&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;@string/fui_title_welcome_back_password_prompt&quot;</span>
+            <span class="s1">android:windowSoftInputMode</span><span class="s2">=&quot;adjustResize&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.firebase.ui.auth.ui.email.WelcomeBackEmailLinkPrompt&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;@string/fui_title_welcome_back_password_prompt&quot;</span>
+            <span class="s1">android:windowSoftInputMode</span><span class="s2">=&quot;adjustResize&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.firebase.ui.auth.ui.email.EmailLinkCatcherActivity&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@style/FirebaseUI.Transparent&quot;</span>
+            <span class="s1">android:windowSoftInputMode</span><span class="s2">=&quot;adjustResize&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.firebase.ui.auth.ui.email.EmailLinkErrorRecoveryActivity&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;@string/fui_sign_in_default&quot;</span>
+            <span class="s1">android:windowSoftInputMode</span><span class="s2">=&quot;adjustResize&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.firebase.ui.auth.ui.idp.AuthMethodPickerActivity&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;@string/fui_default_toolbar_title&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.facebook.FacebookActivity&quot;</span>
+            <span class="s1">android:configChanges</span><span class="s2">=&quot;keyboard|keyboardHidden|screenLayout|screenSize|orientation&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;@string/app_name&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.facebook.CustomTabActivity&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;true&quot; </span><span class="s0">&gt;</span>
+            <span class="s0">&lt;intent-filter&gt;</span>
+                <span class="s0">&lt;action </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.action.VIEW&quot; </span><span class="s0">/&gt;</span>
+
+                <span class="s0">&lt;category </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.category.DEFAULT&quot; </span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;category </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.category.BROWSABLE&quot; </span><span class="s0">/&gt;</span>
+
+                <span class="s0">&lt;data </span><span class="s1">android:scheme</span><span class="s2">=&quot;@string/facebook_login_protocol_scheme&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/intent-filter&gt;</span>
+        <span class="s0">&lt;/activity&gt;</span>
+
+        <span class="s0">&lt;provider</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.firebase.ui.auth.data.client.AuthUiInitProvider&quot;</span>
+            <span class="s1">android:authorities</span><span class="s2">=&quot;com.example.farmsales.authuiinitprovider&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:initOrder</span><span class="s2">=&quot;90&quot; </span><span class="s0">/&gt;</span>
+
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.google.firebase.auth.internal.GenericIdpActivity&quot;</span>
+            <span class="s1">android:excludeFromRecents</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:launchMode</span><span class="s2">=&quot;singleTask&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@android:style/Theme.Translucent.NoTitleBar&quot; </span><span class="s0">&gt;</span>
+            <span class="s0">&lt;intent-filter&gt;</span>
+                <span class="s0">&lt;action </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.action.VIEW&quot; </span><span class="s0">/&gt;</span>
+
+                <span class="s0">&lt;category </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.category.DEFAULT&quot; </span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;category </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.category.BROWSABLE&quot; </span><span class="s0">/&gt;</span>
+
+                <span class="s0">&lt;data</span>
+                    <span class="s1">android:host</span><span class="s2">=&quot;firebase.auth&quot;</span>
+                    <span class="s1">android:path</span><span class="s2">=&quot;/&quot;</span>
+                    <span class="s1">android:scheme</span><span class="s2">=&quot;genericidp&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/intent-filter&gt;</span>
+        <span class="s0">&lt;/activity&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.google.firebase.auth.internal.RecaptchaActivity&quot;</span>
+            <span class="s1">android:excludeFromRecents</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:launchMode</span><span class="s2">=&quot;singleTask&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@android:style/Theme.Translucent.NoTitleBar&quot; </span><span class="s0">&gt;</span>
+            <span class="s0">&lt;intent-filter&gt;</span>
+                <span class="s0">&lt;action </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.action.VIEW&quot; </span><span class="s0">/&gt;</span>
+
+                <span class="s0">&lt;category </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.category.DEFAULT&quot; </span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;category </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.category.BROWSABLE&quot; </span><span class="s0">/&gt;</span>
+
+                <span class="s0">&lt;data</span>
+                    <span class="s1">android:host</span><span class="s2">=&quot;firebase.auth&quot;</span>
+                    <span class="s1">android:path</span><span class="s2">=&quot;/&quot;</span>
+                    <span class="s1">android:scheme</span><span class="s2">=&quot;recaptcha&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/intent-filter&gt;</span>
+        <span class="s0">&lt;/activity&gt;</span>
+
+        <span class="s0">&lt;service</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.google.firebase.auth.api.fallback.service.FirebaseAuthFallbackService&quot;</span>
+            <span class="s1">android:enabled</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot; </span><span class="s0">&gt;</span>
+            <span class="s0">&lt;intent-filter&gt;</span>
+                <span class="s0">&lt;action </span><span class="s1">android:name</span><span class="s2">=&quot;com.google.firebase.auth.api.gms.service.START&quot; </span><span class="s0">/&gt;</span>
+
+                <span class="s0">&lt;category </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.category.DEFAULT&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/intent-filter&gt;</span>
+        <span class="s0">&lt;/service&gt;</span>
+        <span class="s0">&lt;service</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.google.firebase.components.ComponentDiscoveryService&quot;</span>
+            <span class="s1">android:directBootAware</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot; </span><span class="s0">&gt;</span>
+            <span class="s0">&lt;meta-data</span>
+                <span class="s1">android:name</span><span class="s2">=&quot;com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar&quot;</span>
+                <span class="s1">android:value</span><span class="s2">=&quot;com.google.firebase.components.ComponentRegistrar&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;meta-data</span>
+                <span class="s1">android:name</span><span class="s2">=&quot;com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar&quot;</span>
+                <span class="s1">android:value</span><span class="s2">=&quot;com.google.firebase.components.ComponentRegistrar&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;meta-data</span>
+                <span class="s1">android:name</span><span class="s2">=&quot;com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar&quot;</span>
+                <span class="s1">android:value</span><span class="s2">=&quot;com.google.firebase.components.ComponentRegistrar&quot; </span><span class="s0">/&gt;</span>
+            <span class="s4">&lt;!--</span>
+                <span class="s4">This registrar is not defined in the dynamic-module-support sdk itself to allow non-firebase 
+                clients to use it as well, by defining this registrar in their own core/common library. 
+            --&gt;</span>
+            <span class="s0">&lt;meta-data</span>
+                <span class="s1">android:name</span><span class="s2">=&quot;com.google.firebase.components:com.google.firebase.dynamicloading.DynamicLoadingRegistrar&quot;</span>
+                <span class="s1">android:value</span><span class="s2">=&quot;com.google.firebase.components.ComponentRegistrar&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;/service&gt;</span>
+
+        <span class="s0">&lt;provider</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.google.firebase.provider.FirebaseInitProvider&quot;</span>
+            <span class="s1">android:authorities</span><span class="s2">=&quot;com.example.farmsales.firebaseinitprovider&quot;</span>
+            <span class="s1">android:directBootAware</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:initOrder</span><span class="s2">=&quot;100&quot; </span><span class="s0">/&gt;</span>
+
+        <span class="s0">&lt;receiver</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.google.android.gms.measurement.AppMeasurementReceiver&quot;</span>
+            <span class="s1">android:enabled</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot; </span><span class="s0">&gt;</span>
+        <span class="s0">&lt;/receiver&gt;</span>
+
+        <span class="s0">&lt;service</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.google.android.gms.measurement.AppMeasurementService&quot;</span>
+            <span class="s1">android:enabled</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;service</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.google.android.gms.measurement.AppMeasurementJobService&quot;</span>
+            <span class="s1">android:enabled</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:permission</span><span class="s2">=&quot;android.permission.BIND_JOB_SERVICE&quot; </span><span class="s0">/&gt;</span>
+
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.google.android.gms.auth.api.signin.internal.SignInHubActivity&quot;</span>
+            <span class="s1">android:excludeFromRecents</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@android:style/Theme.Translucent.NoTitleBar&quot; </span><span class="s0">/&gt;</span>
+        <span class="s4">&lt;!--</span>
+            <span class="s4">Service handling Google Sign-In user revocation. For apps that do not integrate with 
+            Google Sign-In, this service will never be started. 
+        --&gt;</span>
+        <span class="s0">&lt;service</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.google.android.gms.auth.api.signin.RevocationBoundService&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:permission</span><span class="s2">=&quot;com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION&quot;</span>
+            <span class="s1">android:visibleToInstantApps</span><span class="s2">=&quot;true&quot; </span><span class="s0">/&gt;</span>
+
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.google.android.gms.common.api.GoogleApiActivity&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@android:style/Theme.Translucent.NoTitleBar&quot; </span><span class="s0">/&gt;</span>
+
+        <span class="s0">&lt;provider</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;androidx.lifecycle.ProcessLifecycleOwnerInitializer&quot;</span>
+            <span class="s1">android:authorities</span><span class="s2">=&quot;com.example.farmsales.lifecycle-process&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;false&quot;</span>
+            <span class="s1">android:multiprocess</span><span class="s2">=&quot;true&quot; </span><span class="s0">/&gt;</span>
+    <span class="s0">&lt;/application&gt;</span>
+
+<span class="s0">&lt;/manifest&gt;</span></pre>
+</body>
+</html>

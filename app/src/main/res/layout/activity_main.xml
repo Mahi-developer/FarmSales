@@ -9,7 +9,7 @@
 
 
     <EditText
-        android:id="@+id/editTextPhone"
+        android:id="@+id/phone_num_view"
         android:layout_width="236dp"
         android:layout_height="45dp"
         android:layout_marginStart="1dp"
@@ -18,8 +18,8 @@
         android:ems="10"
         android:hint="@string/phone_number"
         android:inputType="phone"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/otp_btn"
+        app:layout_constraintEnd_toEndOf="@+id/otp_btn"
         app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.941" />
@@ -29,13 +29,13 @@
         android:layout_width="120dp"
         android:layout_height="45dp"
         android:background="@drawable/code_input_box"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/otp_btn"
+        app:layout_constraintStart_toStartOf="@+id/otp_btn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.941" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/otp_btn"
         android:layout_width="354dp"
         android:layout_height="45dp"
         android:layout_marginBottom="400dp"
@@ -47,44 +47,46 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/login_btn"
         android:layout_width="354dp"
         android:layout_height="45dp"
         android:background="@drawable/otp_button"
         android:text="@string/log_in"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/button5"
+        app:layout_constraintEnd_toEndOf="@+id/facebook_btn"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/google_btn"
+        app:layout_constraintTop_toBottomOf="@+id/otp_btn"
         app:layout_constraintVertical_bias="0.366" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/google_btn"
         android:layout_width="164dp"
         android:layout_height="45dp"
         android:background="@drawable/second_button"
         android:text="@string/google"
         android:textAlignment="center"
         app:icon="@drawable/ic_google"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/login_btn"
+        app:layout_constraintStart_toStartOf="@+id/otp_btn"
+        app:layout_constraintTop_toBottomOf="@+id/otp_btn"
         app:layout_constraintVertical_bias="0.755" />
 
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/facebook_btn"
         android:layout_width="164dp"
         android:layout_height="45dp"
         android:background="@drawable/second_button"
         android:text="@string/facebook"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:icon="@drawable/ic_facebook"
+        app:layout_constraintBottom_toTopOf="@+id/login_btn"
+        app:layout_constraintEnd_toEndOf="@+id/otp_btn"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.767" />
+        app:layout_constraintStart_toEndOf="@+id/google_btn"
+        app:layout_constraintTop_toBottomOf="@+id/otp_btn"
+        app:layout_constraintVertical_bias="0.767"
+        tools:ignore="ExtraText" />
 
     <TextView
         android:id="@+id/textView"
@@ -93,12 +95,15 @@
         android:text="@string/or"
         android:textAlignment="center"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/login_btn"
+        app:layout_constraintEnd_toEndOf="@+id/otp_btn"
         app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/otp_btn"
+        app:layout_constraintTop_toBottomOf="@+id/otp_btn"
         app:layout_constraintVertical_bias="0.229" />
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

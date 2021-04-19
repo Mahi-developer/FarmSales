@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1023612342958:android:e0eb1092496d8018f5133f",
+        "mobilesdk_app_id": "1:1023612342958:android:321c313d56e97c66f5133f",
         "android_client_info": {
           "package_name": "com.example.farmsales"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1023612342958-sn23spglbeqap5bqh673f2j1bpabl7hf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.farmsales",
+            "certificate_hash": "7c15f7bc2d94dacbb900408bd1ff214f34b06aad"
+          }
+        },
         {
           "client_id": "1023612342958-il0sbnajlsnp5khpnprlrqti6l7c4vf2.apps.googleusercontent.com",
           "client_type": 3
