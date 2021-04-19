@@ -25,7 +25,7 @@
 
             <com.hbb20.CountryCodePicker
                 android:id="@+id/countryCodePicker"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="45dp"
                 android:layout_marginEnd="-1dp"
                 app:ccp_textSize="17sp"
