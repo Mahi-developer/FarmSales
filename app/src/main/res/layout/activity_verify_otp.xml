@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -12,12 +11,12 @@
     tools:context=".Verify_otp">
 
     <TextView
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="45dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/verify_otp"
-        android:textSize="45sp"
-        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textColor="?colorPrimary"
         android:layout_marginBottom="20dp"/>
 
 
@@ -26,14 +25,14 @@
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:autofillHints=""
-        android:ems="20"
-        android:background="@drawable/otp_box"
+        android:ems="15"
+        android:backgroundTint="?colorPrimary"
         android:hint="@string/enter_otp"
         android:inputType="number"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/light_grey"
+        android:textColor="?colorPrimary"
+        android:textColorHint="?colorPrimaryVariant"
         android:layout_marginBottom="30dp"/>
 
 
@@ -46,25 +45,25 @@
         <Button
             android:id="@+id/verify_otp"
             android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:ems="8"
-            android:textSize="19sp"
-            android:textColor="@color/black"
+            android:layout_height="50dp"
+            android:ems="9"
+            android:textSize="16sp"
+            android:textColor="?colorOnPrimary"
             android:background="@drawable/second_button"
             android:text="@string/verify_otp"
             android:layout_marginEnd="10dp"
-            />
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/resend_otp"
             android:layout_width="wrap_content"
-            android:layout_height="55dp"
+            android:layout_height="50dp"
             android:ems="9"
-            android:textColor="@color/black"
-            android:textSize="19sp"
+            android:textSize="16sp"
+            android:textColor="?colorOnPrimary"
             android:background="@drawable/second_button"
             android:text="@string/resend_otp"
-            />
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
 
