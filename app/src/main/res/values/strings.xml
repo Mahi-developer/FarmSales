@@ -7,7 +7,11 @@
     <string name="phone_number">Phone Number</string>
     <string name="mail">E-mail</string>
     <string name="enter_otp">Enter your OTP here</string>
-    <string name="verify_otp">Verify OTP</string>
+    <string name="verify_otp">Enter Verification Code</string>
     <string name="resend_otp">Resend OTP</string>
-    <string name="we_are_launching_soon">We Are Launching Soon...</string>
+    <string name="we_are_launching_soon">We Are Launching Soon…</string>
+    <string name="didn_t_receive_the_code">Did not receive the code ?</string>
+    <string name="we_have_sent_a_verification_code_to">We have sent a verification code to</string>
+    <string name="eg_no">+91-1234567890</string>
+    <string name="_1">0:60</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.farmsales;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -9,10 +10,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,21 +37,60 @@ import java.util.concurrent.TimeUnit;
 
 import java.util.concurrent.TimeUnit;
 
+import in.aabhasjindal.otptextview.OTPListener;
+
 public class Verify_otp extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-
     private String verificationId;
     public String phone = "";
-    public EditText otp_et;
-    private android.app.AlertDialog progressDialog;
-    public Context context;
+    private Button resend_bt;
+    private TextView timer;
+    public in.aabhasjindal.otptextview.OtpTextView otp_et;
     public PhoneAuthProvider.ForceResendingToken token = null;
+    private int counter = 0;
 
-    public Verify_otp(EditText otp_et, Context context, android.app.AlertDialog progressDialog){
-        this.otp_et = otp_et;
-        this.context = context;
-        this.progressDialog = progressDialog;
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_verify_otp);
+
+        Intent in = getIntent();
+        phone = in.getStringExtra("phone");
+        sendVerificationCode(phone);
+        otp_et = findViewById(R.id.enter_otp);
+        TextView tv_number = findViewById(R.id.tv_no);
+        timer = findViewById(R.id.timer);
+        tv_number.setText(phone);
+        resend_bt = findViewById(R.id.resend_otp);
+        resend_bt.setEnabled(false);
+        ImageButton back = findViewById(R.id.back);
+
+        otp_et.setOtpListener(new OTPListener() {
+            @Override
+            public void onInteractionListener() {
+
+            }
+
+            @Override
+            public void onOTPComplete(String otp) {
+                verifyCode(otp);
+            }
+        });
+
+        resend_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resendVerificationCode(phone, token);
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
 
     public void sendVerificationCode(String number) {
@@ -83,12 +127,32 @@ public class Verify_otp extends AppCompatActivity {
             super.onCodeSent(s, forceResendingToken);
             verificationId = s;
             token = forceResendingToken;
+
+            new CountDownTimer(60000,1000){
+
+                @Override
+                public void onTick(long l) {
+                    int time = 60 - counter;
+                    String str_time = "";
+                    if(time > 9){
+                        str_time = "0:"+time;
+                    }else{
+                        str_time = "0:0"+time;
+                    }
+                    counter++;
+                    timer.setText(str_time);
+                }
+
+                @Override
+                public void onFinish() {
+                    resend_bt.setEnabled(true);
+                }
+            }.start();
         }
 
         @Override
         public void onCodeAutoRetrievalTimeOut(@NonNull String s) {
-            progressDialog.dismiss();
-            Toast.makeText(context,s,Toast.LENGTH_SHORT).show();
+            Toast.makeText(Verify_otp.this,s,Toast.LENGTH_SHORT).show();
             super.onCodeAutoRetrievalTimeOut(s);
         }
 
@@ -99,15 +163,14 @@ public class Verify_otp extends AppCompatActivity {
 
             if (code != null) {
                 verifyCode(code);
-                otp_et.setText(code);
+                otp_et.setOTP(code);
             }
         }
 
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
-            progressDialog.dismiss();
-            Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(Verify_otp.this,e.getMessage(),Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -128,14 +191,13 @@ public class Verify_otp extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(context,Home_page.class);
-                            context.startActivity(intent);
-                            ((Activity)context).finish();
+                            Intent intent = new Intent(Verify_otp.this,Home_page.class);
+                            startActivity(intent);
+                            finish();
                         }
 
                         else {
-                            progressDialog.dismiss();
-                            Toast.makeText(context,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Verify_otp.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     }
 
