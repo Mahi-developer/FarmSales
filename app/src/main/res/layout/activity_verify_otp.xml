@@ -1,49 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".Verify_otp">
+
+    <TextView
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/verify_otp"
+        android:textSize="45sp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="20dp"/>
+
 
     <EditText
         android:id="@+id/enter_otp"
-        android:layout_width="339dp"
-        android:layout_height="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
         android:autofillHints=""
+        android:ems="20"
         android:background="@drawable/otp_box"
-        android:ems="10"
-        android:hint="Enter OTP"
-        android:inputType="phone"
+        android:hint="@string/enter_otp"
+        android:inputType="number"
         android:textAlignment="center"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.429" />
-
-    <Button
-        android:id="@+id/verify_otp"
-        android:layout_width="156dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="332dp"
-        android:background="@drawable/second_button"
-        android:text="Verify OTP"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/enter_otp" />
-
-    <Button
-        android:id="@+id/resend_otp"
-        android:layout_width="160dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="332dp"
-        android:background="@drawable/second_button"
-        android:text="Resend OTP"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/enter_otp" />
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/light_grey"
+        android:layout_marginBottom="30dp"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="80dp">
+
+        <Button
+            android:id="@+id/verify_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:ems="8"
+            android:textSize="19sp"
+            android:textColor="@color/black"
+            android:background="@drawable/second_button"
+            android:text="@string/verify_otp"
+            android:layout_marginEnd="10dp"
+            />
+
+        <Button
+            android:id="@+id/resend_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:ems="9"
+            android:textColor="@color/black"
+            android:textSize="19sp"
+            android:background="@drawable/second_button"
+            android:text="@string/resend_otp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

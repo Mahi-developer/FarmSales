@@ -31,47 +31,11 @@ public class Verify_otp extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private EditText enter_otp;
-
-    private Button verify_otp, resend_otp;
-
     private String verificationId;
+    public String otp;
+    public String message;
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_verify_otp);
-
-        mAuth = FirebaseAuth.getInstance();
-
-        enter_otp = findViewById(R.id.enter_otp);
-        verify_otp = findViewById(R.id.verify_otp);
-        resend_otp = findViewById(R.id.resend_otp);
-
-        String Phone_number = getIntent().getStringExtra("Phone_number");
-
-        sendVerificationCode(Phone_number);
-
-        Toast.makeText(Verify_otp.this, "OTP send Successfully", Toast.LENGTH_SHORT).show();
-
-        verify_otp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (TextUtils.isEmpty(enter_otp.getText().toString())) {
-
-                    Toast.makeText(Verify_otp.this, "Please enter OTP", Toast.LENGTH_SHORT).show();
-
-                } else {
-
-                    verifyCode(enter_otp.getText().toString());
-                }
-            }
-        });
-    }
-
-    private void sendVerificationCode(String number) {
+    public void sendVerificationCode(String number) {
         // this method is used for getting
         // OTP on user phone number.
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -101,8 +65,8 @@ public class Verify_otp extends AppCompatActivity {
             final String code = phoneAuthCredential.getSmsCode();
 
             if (code != null) {
+                otp = code;
 
-                enter_otp.setText(code);
                 verifyCode(code);
             }
         }
@@ -110,8 +74,8 @@ public class Verify_otp extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
-            // displaying error message with firebase exception.
-            Toast.makeText(Verify_otp.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            // displaying error message with firebase exception
+            message = e.getMessage();
         }
     };
 
@@ -131,20 +95,15 @@ public class Verify_otp extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
-                            Intent i = new Intent(Verify_otp.this, Home_page.class);
-                            startActivity(i);
-                            finish();
-
+                            message = "";
                         }
 
                         else {
-                            Toast.makeText(Verify_otp.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            message = task.getException().getMessage();
                         }
                     }
                 });
     }
-
 
 
 }
