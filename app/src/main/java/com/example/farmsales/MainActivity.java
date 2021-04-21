@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.hbb20.CountryCodePicker;
 
@@ -26,9 +27,6 @@ import in.aabhasjindal.otptextview.OTPListener;
 public class MainActivity extends AppCompatActivity {
 
     private EditText edtPhone;
-
-    public static in.aabhasjindal.otptextview.OtpTextView otp_et;
-    public AlertDialog alertDialog;
     private CountryCodePicker country_code;
 
     @Override
@@ -36,15 +34,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         edtPhone = findViewById(R.id.phone_num_view);
         Button sendOTP = findViewById(R.id.otp_btn);
         country_code = findViewById(R.id.countryCodePicker);
-
+        Button google_bt = findViewById(R.id.google_btn);
 
         sendOTP.setOnClickListener(v -> {
 
-            if (TextUtils.isEmpty(edtPhone.getText().toString())) {
+            if (edtPhone.getText().toString().length() != 10) {
                 Toast.makeText(MainActivity.this, "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
             } else {
                 String Phone_number = "+" + country_code.getSelectedCountryCode() + edtPhone.getText().toString();
@@ -53,5 +50,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(in);
             }
         });
+
+        google_bt.setOnClickListener(v -> {
+
+        });
+
     }
 }
