@@ -95,16 +95,13 @@
                 tools:ignore="ButtonStyle" />
 
 
-            <Button
+            <com.facebook.login.widget.LoginButton
                 android:id="@+id/facebook_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:background="@drawable/second_button"
-                android:ems="10"
-                android:textColor="?colorOnPrimary"
-                android:text="@string/facebook"
-                app:icon="@drawable/ic_facebook"
-                tools:ignore="ButtonStyle" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp" />
 
         </LinearLayout>
 

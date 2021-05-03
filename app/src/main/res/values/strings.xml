@@ -14,4 +14,6 @@
     <string name="we_have_sent_a_verification_code_to">We have sent a verification code to</string>
     <string name="eg_no">+91-1234567890</string>
     <string name="_1">0:60</string>
+    <string name="facebook_application_id">1146828935792022</string>
+    <string name="fb_login_protocol_scheme">fb1146828935792022</string>
 </resources>
