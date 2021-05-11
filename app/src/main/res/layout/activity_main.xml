@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:gravity="center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg1"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="20dp">
+        tools:ignore="UselessParent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="350dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
             <com.hbb20.CountryCodePicker
                 android:id="@+id/countryCodePicker"
-                android:layout_width="115dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="-6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:background="@drawable/code_input_box"
                 app:ccp_textSize="17sp"
                 app:ccpDialog_textColor="?colorSecondary"
                 app:ccp_contentColor="?colorSecondary"
-                app:ccp_arrowColor="?colorSecondary"
+                app:ccp_arrowColor="?colorSecondaryVariant"
                 />
 
             <EditText
                 android:id="@+id/phone_num_view"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginStart="1dp"
+                android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:background="@drawable/phone_num_input_box"
-                android:ems="10"
+                android:ems="13"
                 android:textSize="18sp"
+                android:drawableStart="@drawable/ic_phone"
+                android:drawablePadding="10dp"
                 android:textColorHint="?colorPrimaryVariant"
                 android:textColor="?colorSecondary"
                 android:hint="@string/phone_number"
@@ -55,14 +55,14 @@
 
         <Button
             android:id="@+id/otp_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/otp_button"
-            android:ems="16"
-            android:textColor="?colorOnPrimary"
-            android:textSize="17.5sp"
-            android:text="@string/send_otp" />
+            android:ems="19"
+            android:textColor="?colorSecondary"
+            android:textSize="17sp"
+            android:text="@string/send_otp"/>
 
         <TextView
             android:id="@+id/textView"
@@ -70,13 +70,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:text="@string/or"
-            android:textAlignment="center"
-            android:textColor="?colorPrimary"
+            android:textColor="?colorSecondary"
             android:textSize="22sp"
-            android:textStyle="bold" />
+            android:fontFamily="sans-serif-black"
+            android:textStyle="bold"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:orientation="horizontal">
@@ -84,37 +84,41 @@
             <Button
                 android:id="@+id/google_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/second_button"
-                android:ems="10"
-                android:textColor="?colorOnPrimary"
+                android:ems="11"
+                android:textColor="?colorSecondary"
                 android:text="@string/google"
-                android:textAlignment="center"
-                app:icon="@drawable/ic_google"
-                tools:ignore="ButtonStyle" />
+                android:drawableLeft="@drawable/ic_google"
+                tools:ignore="ButtonStyle,RtlHardcoded" />
 
-
-            <com.facebook.login.widget.LoginButton
+            <Button
                 android:id="@+id/facebook_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp" />
+                android:background="@drawable/second_button"
+                android:ems="12"
+                android:textColor="?colorSecondary"
+                android:text="@string/facebook"
+                android:drawableLeft="@drawable/ic_facebook"
+                android:drawablePadding="5dp"
+                tools:ignore="ButtonStyle,RtlHardcoded" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/login_btn"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/otp_button"
-            android:ems="16"
-            android:textSize="18sp"
-            android:textColor="?colorOnPrimary"
+            android:ems="19"
+            android:textSize="17sp"
+            android:textColor="?colorSecondary"
             android:text="@string/mail"
-            android:layout_marginBottom="40dp"/>
+            android:layout_marginBottom="40dp"
+            tools:ignore="RtlHardcoded" />
+
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

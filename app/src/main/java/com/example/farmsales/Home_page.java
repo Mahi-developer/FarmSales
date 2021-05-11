@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -39,10 +40,10 @@ public class Home_page extends AppCompatActivity {
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
-        assert user != null;
-        String photoUrl = user.getPhotoUrl().toString();
-        Picasso.get().load(photoUrl).into(iv);
-
+        if(user.getPhotoUrl()!=null){
+            String photoUrl = user.getPhotoUrl().toString();
+            Picasso.get().load(photoUrl).into(iv);
+        }
         tv.setText(user.getDisplayName());
         tv.setOnClickListener(v->{
             sign_out();
@@ -58,6 +59,7 @@ public class Home_page extends AppCompatActivity {
 
     public void sign_out(){
         auth.signOut();
+        LoginManager.getInstance().logOut();
         mGoogleSignInClient.signOut().addOnCompleteListener(this,task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(this,"Signed Out Successfully",Toast.LENGTH_SHORT).show();

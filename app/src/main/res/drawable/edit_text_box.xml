@@ -3,12 +3,7 @@
 
     <size android:height="50dp" />
 
-    <corners
-    android:bottomLeftRadius="0dp"
-    android:bottomRightRadius="8dp"
-    android:radius="0dp"
-    android:topLeftRadius="0dp"
-    android:topRightRadius="8dp" />
+    <corners android:radius="8dp" />
 
     <solid android:color="?colorSecondaryVariant"/>
 

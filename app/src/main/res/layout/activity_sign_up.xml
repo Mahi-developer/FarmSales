@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?colorPrimary"
+    android:orientation="vertical"
+    tools:context=".SignUp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/caros_med"
+            android:layout_gravity="center_horizontal"
+            android:textColor="?colorSecondary"
+            android:textSize="55sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/already_have_an_account"
+                android:fontFamily="@font/caros_light"
+                android:textColor="?colorPrimaryVariant"
+                android:textSize="16sp"/>
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:text="@string/log_in"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/caros_light"
+                android:textColor="?colorPrimaryVariant"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:layout_gravity="start"
+                android:fontFamily="@font/caros_light"
+                android:textColor="?colorSecondary"
+                android:layout_marginBottom="5dp"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="18"
+                android:hint="@string/your_full_name"
+                android:textColorHint="?colorPrimaryVariant"
+                android:textColor="?colorSecondary"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/edit_text_box"
+                android:importantForAutofill="no"
+                android:foregroundTint="?colorOnPrimary"
+                android:inputType="textPersonName" />
+            <TextView
+                android:fontFamily="@font/caros_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phone"
+                android:layout_gravity="start"
+                android:textColor="?colorSecondary"
+                android:layout_marginBottom="5dp"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="18"
+                android:hint="@string/your_mobile_number"
+                android:textColorHint="?colorPrimaryVariant"
+                android:textColor="?colorSecondary"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/edit_text_box"
+                android:importantForAutofill="no"
+                android:inputType="phone" />
+            <TextView
+                android:fontFamily="@font/caros_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/e_mail"
+                android:layout_gravity="start"
+                android:textColor="?colorSecondary"
+                android:layout_marginBottom="5dp"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="18"
+                android:drawableStart="@drawable/ic_mail"
+                android:drawablePadding="10dp"
+                android:hint="@string/your_email"
+                android:textColorHint="?colorPrimaryVariant"
+                android:textColor="?colorSecondary"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/edit_text_box"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress" />
+            <TextView
+                android:fontFamily="@font/caros_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/who_are_you"
+                android:layout_gravity="start"
+                android:textColor="?colorSecondary"
+                android:layout_marginBottom="5dp"
+                android:textSize="20sp"/>
+            <RadioGroup
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-2dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/farmer"
+                    android:fontFamily="@font/caros_light"
+                    android:textSize="20sp"
+                    android:paddingHorizontal="10dp"
+                    android:textColor="?colorSecondary"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/customer"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/caros_light"
+                    android:paddingHorizontal="10dp"
+                    android:textColor="?colorSecondary"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agent"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/caros_light"
+                    android:paddingHorizontal="10dp"
+                    android:textColor="?colorSecondary"
+                    />
+
+            </RadioGroup>
+            <TextView
+                android:fontFamily="@font/caros_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password"
+                android:layout_gravity="start"
+                android:textColor="?colorSecondary"
+                android:layout_marginBottom="5dp"
+                android:textSize="20sp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/transparent"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/ic_show_pass"
+                app:passwordToggleTint="?colorPrimaryVariant">
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="20"
+                    android:hint="@string/your_new_password"
+                    android:textSize="18sp"
+                    android:textColorHint="?colorPrimaryVariant"
+                    android:textColor="?colorSecondary"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/edit_text_box"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    tools:ignore="RtlSymmetry" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:fontFamily="@font/caros_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/confirm_password"
+                android:layout_gravity="start"
+                android:textColor="?colorSecondary"
+                android:layout_marginBottom="5dp"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/confirmPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="18"
+                android:hint="@string/re_enter_your_password"
+                android:drawableStart="@drawable/ic_lock"
+                android:drawablePadding="10dp"
+                android:textColorHint="?colorPrimaryVariant"
+                android:textColor="?colorSecondary"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/edit_text_box"
+                android:importantForAutofill="no"
+                android:inputType="textPassword" />
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/submit_box"
+                android:text="@string/submit"
+                android:textColor="?colorSecondary"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</ScrollView>

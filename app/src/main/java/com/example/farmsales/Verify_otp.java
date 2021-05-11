@@ -31,6 +31,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.security.PublicKey;
 import java.util.concurrent.TimeUnit;
@@ -191,9 +193,22 @@ public class Verify_otp extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(Verify_otp.this,Home_page.class);
-                            startActivity(intent);
-                            finish();
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            db.collection("users").document(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(task1 -> {
+                                if(task1.isSuccessful()){
+                                    if(task1.getResult().exists()){
+                                        Intent intent = new Intent(Verify_otp.this,Home_page.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }else{
+                                        Intent intent = new Intent(Verify_otp.this,SignUp.class);
+                                        intent.putExtra("phone",phone);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                }
+                            });
+
                         }
 
                         else {

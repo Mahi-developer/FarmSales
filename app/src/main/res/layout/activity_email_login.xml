@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:background="?colorPrimary"
+    tools:context=".EmailLogin">
+
+    <ImageView
+        android:id="@+id/ivLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/profile_bg"
+        android:src="@drawable/user_profile"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/todo" />
+    <TextView
+        android:id="@+id/tvLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/thin"
+        android:textColor="?colorSecondary"
+        android:text="@string/log_in"
+        android:layout_marginBottom="30dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:id="@+id/email_login"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:backgroundTint="?colorSecondary"
+            android:inputType="textEmailAddress"
+            android:imeOptions="actionNext"
+            android:hint="@string/email"
+            android:textColorHint="?colorPrimaryVariant"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/ic_mail"
+            android:drawablePadding="15dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="?colorSecondary"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleDrawable="@drawable/ic_show_pass"
+            app:startIconDrawable="@drawable/ic_lock"
+            >
+
+            <EditText
+                android:id="@+id/password_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:backgroundTint="?colorSecondary"
+                android:imeOptions="actionDone"
+                android:hint="@string/pass"
+                android:background="@color/transparent"
+                android:textColorHint="?colorPrimaryVariant"
+                android:textSize="18sp"
+                android:layout_marginBottom="20sp"
+                android:textColor="?colorSecondary"
+                android:importantForAutofill="no"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/mail_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/log_in"
+            android:textColor="?colorSecondary"
+            android:backgroundTint="?colorSecondaryVariant"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/forgot_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forgot_your_password"
+        android:textStyle="normal"
+        android:textAllCaps="false"
+        android:fontFamily="@font/caros_light"
+        android:layout_gravity="center_horizontal"
+        android:textSize="12sp"
+        android:textColor="?colorPrimaryVariant"
+        android:background="@color/transparent"
+        android:layout_marginBottom="40dp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:fontFamily="@font/caros_light"
+            android:textColor="?colorPrimaryVariant"
+            android:text="@string/don_t_have_an_account"/>
+
+        <Button
+            android:id="@+id/new_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_one"
+            android:textAllCaps="false"
+            android:fontFamily="@font/caros_light"
+            android:textSize="12sp"
+            android:textColor="?colorPrimaryVariant"
+            android:background="@color/transparent"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

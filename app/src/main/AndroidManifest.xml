@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.farmsales">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.farmsales" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_SMS" />
@@ -12,16 +13,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FarmSales">
+        android:theme="@style/Theme.FarmSales"
+        android:usesCleartextTraffic="true"
+        tools:ignore="AllowBackup,UnusedAttribute" >
+        <activity android:name=".EmailLogin" />
+        <activity android:name=".SignUp" />
         <activity android:name=".Home_page" />
         <activity android:name=".Verify_otp" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_application_id" />
