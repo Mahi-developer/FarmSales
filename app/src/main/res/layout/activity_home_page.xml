@@ -48,9 +48,6 @@
         android:layout_below="@+id/r1"
         android:layout_above="@+id/l1"
         />
-
-
-
     <LinearLayout
         android:id="@+id/l1"
         android:layout_width="match_parent"
@@ -58,6 +55,7 @@
         android:background="?colorPrimary"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
+        android:paddingTop="10dp"
         android:paddingBottom="10dp">
 
         <ImageButton
