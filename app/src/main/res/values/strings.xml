@@ -53,5 +53,6 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="farmsales">Farmsales</string>
-    <string name="product">Product</string>
+    <string name="product">Product Quantity</string>
+    <string name="product_name">Product name</string>
 </resources>
