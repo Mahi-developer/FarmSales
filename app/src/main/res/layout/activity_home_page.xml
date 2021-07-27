@@ -1,32 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?colorPrimary"
-    tools:context=".Home_page">
+    tools:context=".Home_page"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="352dp"
-        android:layout_height="44dp"
-        android:text="@string/we_are_launching_soon"
-        android:textAlignment="center"
-        android:textColor="?colorSecondary"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"/>
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/user_profile"
-        android:layout_alignBottom="@id/textView2"
-        android:layout_marginBottom="50dp"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:srcCompat="@tools:sample/avatars"
-        android:contentDescription="@string/todo" />
+        android:background="?colorPrimary">
 
-</RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/farmsales"
+                android:fontFamily="@font/caros_med"
+                android:textColor="?colorSecondary"
+                android:textSize="25sp"
+                android:layout_marginStart="15dp" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_search_24"
+                android:background="@color/transparent"
+                android:layout_toStartOf="@+id/cart"
+                android:layout_marginRight="25dp"/>
+            <ImageButton
+                android:id="@+id/cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_shopping_cart_24"
+                android:background="@color/transparent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="15dp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimary"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/ic_baseline_home_24"
+                android:background="@color/transparent"
+                android:layout_alignParentBottom="true"/>
+            <ImageButton
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_location_on_24"
+                android:background="@color/transparent"
+                android:layout_marginLeft="65dp"
+                android:layout_toEndOf="@+id/home"
+                android:layout_alignParentBottom="true"/>
+            <ImageButton
+                android:id="@+id/add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_add_circle_outline_24"
+                android:background="@color/transparent"
+                android:layout_toStartOf="@id/notification"
+                android:layout_toEndOf="@+id/location"
+                android:layout_alignParentBottom="true"/>
+            <ImageButton
+                android:id="@+id/notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_notifications_24"
+                android:background="@color/transparent"
+                android:layout_toStartOf="@+id/user_profile"
+                android:layout_marginRight="65dp"
+                android:layout_alignParentBottom="true"/>
+            <ImageButton
+                android:id="@+id/user_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/user_profile"
+                android:background="@color/transparent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="15dp"
+                android:layout_alignParentBottom="true"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

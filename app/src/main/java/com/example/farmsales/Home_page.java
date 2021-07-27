@@ -30,8 +30,6 @@ public class Home_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        TextView tv = findViewById(R.id.textView2);
-        ImageView iv = findViewById(R.id.imageView);
         auth= FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -42,13 +40,7 @@ public class Home_page extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
         if(user.getPhotoUrl()!=null){
             String photoUrl = user.getPhotoUrl().toString();
-            Picasso.get().load(photoUrl).into(iv);
         }
-        tv.setText(user.getDisplayName());
-        tv.setOnClickListener(v->{
-            sign_out();
-            finish();
-        });
     }
 
     @Override

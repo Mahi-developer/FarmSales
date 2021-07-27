@@ -40,7 +40,6 @@
                 android:id="@+id/phone_num_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:autofillHints=""
                 android:background="@drawable/phone_num_input_box"
                 android:ems="13"
                 android:textSize="18sp"
