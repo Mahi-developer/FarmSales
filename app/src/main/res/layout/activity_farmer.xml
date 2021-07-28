@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/r1"
+        android:id="@+id/r1_farmer"
         android:paddingTop="10dp">
 
         <TextView
@@ -28,10 +28,10 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_search_24"
             android:background="@color/transparent"
-            android:layout_toStartOf="@+id/cart"
+            android:layout_toStartOf="@+id/cart_farmer"
             android:layout_marginEnd="25dp"/>
         <ImageButton
-            android:id="@+id/cart"
+            android:id="@+id/cart_farmer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_shopping_cart_24"
@@ -42,16 +42,16 @@
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/list_farmer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/r1"
-        android:layout_above="@+id/l1"
+        android:layout_below="@+id/r1_farmer"
+        android:layout_above="@+id/l1_farmer"
         />
 
 
     <LinearLayout
-        android:id="@+id/l1"
+        android:id="@+id/l1_farmer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
@@ -61,7 +61,7 @@
         android:paddingBottom="10dp">
 
         <ImageButton
-            android:id="@+id/home"
+            android:id="@+id/home_farmer"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
             android:background="@color/transparent"
             />
         <ImageButton
-            android:id="@+id/location"
+            android:id="@+id/location_farmer"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
             android:background="@color/transparent"
             />
         <ImageButton
-            android:id="@+id/add"
+            android:id="@+id/add_farmer"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
             android:background="@color/transparent"
             />
         <ImageButton
-            android:id="@+id/notification"
+            android:id="@+id/notification_farmer"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
             android:background="@color/transparent"
             />
         <ImageButton
-            android:id="@+id/user_profile"
+            android:id="@+id/user_profile_farmer"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -62,7 +62,7 @@ public class CustomAdapter extends BaseAdapter{
         getData(image_view,product_name.get(i));
         name.setText(product_name.get(i));
         quantity.setText(product_quantity.get(i));
-        price.setText(product_price.get(i));
+        price.setText("₹"+product_price.get(i));
         return view;
     }
 
