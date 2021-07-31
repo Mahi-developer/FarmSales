@@ -16,7 +16,9 @@
         android:theme="@style/Theme.FarmSales"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
-        <activity android:name=".FarmerActivity"></activity>
+        <activity android:name=".Cart"></activity>
+        <activity android:name=".Location" />
+        <activity android:name=".FarmerActivity" />
         <activity android:name=".EmailLogin" />
         <activity android:name=".SignUp" />
         <activity android:name=".Home_page" />

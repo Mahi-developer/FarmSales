@@ -67,6 +67,22 @@ public class Home_page extends AppCompatActivity {
             Picasso.get().load(photoUrl).into(userProfile);
         }
 
+        ImageButton location = findViewById(R.id.location);
+        location.setOnClickListener(l->
+        {
+            Intent intent = new Intent(this,Location.class);
+            startActivity(intent);
+            finishAndRemoveTask();
+        });
+
+        ImageButton cart = findViewById(R.id.cart);
+        cart.setOnClickListener(l->
+        {
+            Intent intent = new Intent(this,Cart.class);
+            startActivity(intent);
+            finishAndRemoveTask();
+        });
+
     }
 
     @Override
