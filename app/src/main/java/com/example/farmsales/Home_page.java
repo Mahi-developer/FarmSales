@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -47,10 +48,14 @@ public class Home_page extends AppCompatActivity {
           super.onCreate(savedInstanceState);
           setContentView(R.layout.activity_home_page);
 
-
+        ImageButton userProfile = findViewById(R.id.user_profile);
         new GetRates().execute();
         auth= FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
+        userProfile.setOnClickListener(l ->
+        {
+            sign_out();
+        });
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -59,6 +64,7 @@ public class Home_page extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
         if(user.getPhotoUrl()!=null){
             String photoUrl = user.getPhotoUrl().toString();
+            Picasso.get().load(photoUrl).into(userProfile);
         }
 
     }

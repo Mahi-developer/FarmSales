@@ -84,7 +84,7 @@ public class SignUp extends AppCompatActivity {
                            phone.setText("");
                        }
                     });
-        }else{
+        }else if(Email == null){
             mAuth = FirebaseAuth.getInstance();
             mAuth.fetchSignInMethodsForEmail(email.getText().toString()).addOnCompleteListener(task -> {
                 if(task.isSuccessful()){
