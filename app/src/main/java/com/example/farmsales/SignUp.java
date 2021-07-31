@@ -8,22 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.firebase.ui.auth.data.model.User;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.security.AuthProvider;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class SignUp extends AppCompatActivity {
 
@@ -34,7 +26,7 @@ public class SignUp extends AppCompatActivity {
     FirebaseUser user;
     FirebaseAuth mAuth;
     boolean isFromPhone;
-    String UserType,Name,Phone,Email,Password,ConfirmPassword;;
+    String UserType,Name,Phone,Email,Password,ConfirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +35,8 @@ public class SignUp extends AppCompatActivity {
 
         Intent in = getIntent();
         Phone = in.getStringExtra("phone");
+        Email = in.getStringExtra("mail");
+        Name = in.getStringExtra("name");
 
         //hooks
         name = findViewById(R.id.name);
@@ -59,6 +53,10 @@ public class SignUp extends AppCompatActivity {
         if(Phone != null){
             phone.setText(Phone);
             isFromPhone = true;
+        }
+        if(Email != null){
+            email.setText(Email);
+            name.setText(Name);
         }
 
         login.setOnClickListener(v->{
@@ -160,8 +158,9 @@ public class SignUp extends AppCompatActivity {
         userDetails.put("Name",Name);
         userDetails.put("Phone",Phone);
         userDetails.put("Email",Email);
+        userDetails.put("Type",UserType);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users")
+        db.collection("users/"+UserType)
                 .document(uid)
                 .set(userDetails)
                 .addOnCompleteListener(task1 -> {

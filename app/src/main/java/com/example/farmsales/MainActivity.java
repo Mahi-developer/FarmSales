@@ -33,6 +33,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.hbb20.CountryCodePicker;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -189,6 +190,23 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if(user != null){
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("users").document(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(task->{
+                if(task.isSuccessful()){
+                    if(task.getResult().exists()){
+                        Intent intent = new Intent(MainActivity.this,Home_page.class);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                        Intent intent = new Intent(MainActivity.this,SignUp.class);
+                        intent.putExtra("phone",user.getPhoneNumber());
+                        intent.putExtra("mail",user.getEmail());
+                        intent.putExtra("name",user.getDisplayName());
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            });
             Intent intent = new Intent(this,Home_page.class);
             Toast.makeText(this,"Signed In as "+user.getDisplayName(),Toast.LENGTH_SHORT).show();
             startActivity(intent);

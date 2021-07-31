@@ -73,6 +73,7 @@ public class Home_page extends AppCompatActivity {
         simpleList = (ListView) findViewById(R.id.list);
         CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), product_name, product_quantity, product_price);
         simpleList.setAdapter(customAdapter);
+
     }
 
     public void sign_out(){
