@@ -1,8 +1,10 @@
 package com.example.farmsales;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -42,14 +44,16 @@ public class Home_page extends AppCompatActivity {
     private final ArrayList<String> product_quantity = new ArrayList<String>();
     private ArrayList<String> product_price = new ArrayList<String>();
     private ListView simpleList;
+    private final String[] location_list_item = {"Ambur","Arcot","Ariyalur","Chennai","Coimbatore","Cuddalore","Dharmapuri","Dindigul","Erode","Hosur","Jayankondam","Kallakurichi","Kanchipuram","Kanyakumari","Karaikudi","Karur","Kodaikanal","Kovilpatti","Krishnagiri","Kumbakonam","Madurai","Nagapattinam","Nagercoil","Namakkal","Ooty","Palani","Paramakudi","Perambalur","Pollachi","Pudukkottai","Ramanathapuram","Rameswaram","Salem","Sivagangai","Thanjavur","Theni","Tirunelveli","Tiruppur","Tiruvannamalai","Tiruvarur","Trichy","Tuticorin","Vellore","Villupuram","Virudhunagar"};
+    private String location = "Vellore";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
           super.onCreate(savedInstanceState);
           setContentView(R.layout.activity_home_page);
-
+        new GetRates(location).execute();
         ImageButton userProfile = findViewById(R.id.user_profile);
-        new GetRates().execute();
         auth= FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         userProfile.setOnClickListener(l ->
@@ -70,9 +74,7 @@ public class Home_page extends AppCompatActivity {
         ImageButton location = findViewById(R.id.location);
         location.setOnClickListener(l->
         {
-            Intent intent = new Intent(this,Location.class);
-            startActivity(intent);
-            finishAndRemoveTask();
+            createLocationDialog();
         });
 
         ImageButton cart = findViewById(R.id.cart);
@@ -80,8 +82,39 @@ public class Home_page extends AppCompatActivity {
         {
             Intent intent = new Intent(this,Cart.class);
             startActivity(intent);
-            finishAndRemoveTask();
         });
+
+    }
+
+    private void createLocationDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Home_page.this);
+        builder.setTitle("Select your District : ");
+        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,location_list_item);
+        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                location = adapter.getItem(i);
+                AlertDialog.Builder confirmationBuilder = new AlertDialog.Builder(Home_page.this);
+                confirmationBuilder.setMessage(location);
+                confirmationBuilder.setTitle("Your District is");
+                confirmationBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {
+                        dialog.dismiss();
+                        new GetRates(location).execute();
+                    }
+                });
+                confirmationBuilder.show();
+            }
+        });
+        builder.show();
 
     }
 
@@ -110,10 +143,19 @@ public class Home_page extends AppCompatActivity {
     }
 
     private class GetRates extends AsyncTask<Void,Void,Void> {
+
+        private String locate;
+        GetRates(String location){
+            this.locate = location.toLowerCase();
+        }
+
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected Void doInBackground(Void...n) {
             try {
-                org.jsoup.nodes.Document doc = Jsoup.connect("https://rates.goldenchennai.com/vegetable-price/vellore-vegetable-price-today/").get();
+                System.out.println("Location - "+locate);
+                String url = "https://rates.goldenchennai.com/vegetable-price/"+locate+"-vegetable-price-today/";
+                System.out.println("URL = "+url);
+                org.jsoup.nodes.Document doc = Jsoup.connect(url).get();
                 org.jsoup.select.Elements rows = doc.select("tr");
                 for (org.jsoup.nodes.Element row : rows) {
                     org.jsoup.select.Elements columns = row.select("td");
@@ -121,16 +163,16 @@ public class Home_page extends AppCompatActivity {
                         product_data.add(column.text());
                     }
                 }
-                for(int i=0;i<product_data.size();i=i+3){
+                for (int i = 0; i < product_data.size(); i = i + 3) {
                     product_name.add(product_data.get(i));
                 }
-                for(int i=1;i<product_data.size();i=i+3){
+                for (int i = 1; i < product_data.size(); i = i + 3) {
                     product_quantity.add(product_data.get(i));
                 }
-                for(int i=2;i<product_data.size();i=i+3){
+                for (int i = 2; i < product_data.size(); i = i + 3) {
                     product_price.add(product_data.get(i));
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
@@ -141,27 +183,5 @@ public class Home_page extends AppCompatActivity {
             super.onPostExecute(unused);
             setDataRates();
         }
-
-
-//        image_view = findViewById(R.id.image_view);
-//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//        DatabaseReference databaseReference = firebaseDatabase.getReference();
-//        DatabaseReference getImage = databaseReference.child("Bangalore Tomato (Bangalore Thakkali)");
-//
-//        getImage.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                String link = dataSnapshot.getValue(String.class);
-//                Picasso.get().load(link).into(image_view);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(Home_page.this, "Error Loading Image", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-
-     }
-
+    }
 }

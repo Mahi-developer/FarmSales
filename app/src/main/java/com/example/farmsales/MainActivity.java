@@ -1,16 +1,29 @@
 package com.example.farmsales;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.os.Parcelable;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -24,6 +37,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -33,23 +51,41 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.hbb20.CountryCodePicker;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
+import org.jsoup.Jsoup;
+
+import java.io.IOException;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int PERMISSION_ID = 44;
     private final int RC_SIGN_IN = 1;
     GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     private final String TAG = "MainActivity";
     private EditText edtPhone;
+    private ArrayList<String> product_data = new ArrayList<String>();
+    private ArrayList<String> product_name = new ArrayList<String>();
+    private final ArrayList<String> product_quantity = new ArrayList<String>();
+    private ArrayList<String> product_price = new ArrayList<String>();
     private CountryCodePicker country_code;
     private CallbackManager mCallbackManager;
+    public FusedLocationProviderClient mFusedLocationClient;
+    private double latitude,longitude;
+    private String city;
+    private Geocoder geocoder;
+    private List<Address> addressList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         Button email = findViewById(R.id.login_btn);
         country_code = findViewById(R.id.countryCodePicker);
         Button google = findViewById(R.id.google_btn);
-
         mAuth = FirebaseAuth.getInstance();
 
 //        via phone
@@ -77,13 +112,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 //        via google
-        google.setOnClickListener(v->{
+        google.setOnClickListener(v -> {
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.default_web_client_id))
                     .requestEmail()
                     .build();
 
-            mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
+            mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
             signIn();
         });
 
@@ -103,18 +138,18 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(FacebookException error) {
-                Toast.makeText(MainActivity.this,"LogIn Failed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "LogIn Failed", Toast.LENGTH_SHORT).show();
                 System.out.println(error.getMessage());
             }
         });
 
-        loginButton.setOnClickListener(v->{
+        loginButton.setOnClickListener(v -> {
             LoginManager.getInstance().logIn(this,
                     Arrays.asList("email", "user_birthday", "public_profile")
             );
         });
-        email.setOnClickListener(v->{
-            Intent signUpIntent = new Intent(this,EmailLogin.class);
+        email.setOnClickListener(v -> {
+            Intent signUpIntent = new Intent(this, EmailLogin.class);
             startActivity(signUpIntent);
         });
 
@@ -122,21 +157,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void handleFacebookToken(AccessToken accessToken) {
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
-        mAuth.signInWithCredential(credential).addOnCompleteListener(this,task->{
-            if(task.isSuccessful()){
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
                 updateUI(mAuth.getCurrentUser());
-                Toast.makeText(MainActivity.this,"Logged In Successfully",Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(MainActivity.this,"LogIn Failed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Logged In Successfully", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, "LogIn Failed", Toast.LENGTH_SHORT).show();
                 System.out.println(task.getException().getMessage());
             }
         });
     }
 
     //for Google Sign In
-    private void signIn(){
+    private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent,RC_SIGN_IN);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     @Override
@@ -144,13 +179,13 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
-        if(user!=null){
-            if(user.getDisplayName() != null){
-                Intent intent = new Intent(this,Home_page.class);
-                Toast.makeText(this,"Signed In as "+user.getDisplayName(),Toast.LENGTH_SHORT).show();
+        if (user != null) {
+            if (user.getDisplayName() != null) {
+                Intent intent = new Intent(this, Home_page.class);
+                Toast.makeText(this, "Signed In as " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
                 startActivity(intent);
-            }else if(user.getPhoneNumber() != null){
-                Intent signUpIntent = new Intent(this,SignUp.class);
+            } else if (user.getPhoneNumber() != null) {
+                Intent signUpIntent = new Intent(this, SignUp.class);
                 signUpIntent.putExtra("phone", user.getPhoneNumber());
                 startActivity(signUpIntent);
             }
@@ -159,9 +194,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        mCallbackManager.onActivityResult(requestCode,resultCode,data);
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RC_SIGN_IN){
+        if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInTask(task);
         }
@@ -171,45 +206,46 @@ public class MainActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount account = task.getResult(ApiException.class);
             FirebaseGoogleAuth(account);
-        }catch (ApiException e){
-            Toast.makeText(MainActivity.this,"Sign In Cancelled",Toast.LENGTH_SHORT).show();
+        } catch (ApiException e) {
+            Toast.makeText(MainActivity.this, "Sign In Cancelled", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void FirebaseGoogleAuth(GoogleSignInAccount account) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(),null);
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, task -> {
-            if(task.isSuccessful()){
+            if (task.isSuccessful()) {
                 FirebaseUser user = mAuth.getCurrentUser();
                 updateUI(user);
-            }else {
+            } else {
                 updateUI(null);
             }
         });
     }
 
     private void updateUI(FirebaseUser user) {
-        if(user != null){
+        if (user != null) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            db.collection("users").document(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(task->{
-                if(task.isSuccessful()){
-                    if(task.getResult().exists()){
-                        Intent intent = new Intent(MainActivity.this,Home_page.class);
+            db.collection("users").document(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    if (task.getResult().exists()) {
+                        Intent intent = new Intent(MainActivity.this, Home_page.class);
                         startActivity(intent);
                         finish();
-                    }else{
-                        Intent intent = new Intent(MainActivity.this,SignUp.class);
-                        intent.putExtra("phone",user.getPhoneNumber());
-                        intent.putExtra("mail",user.getEmail());
-                        intent.putExtra("name",user.getDisplayName());
+                    } else {
+                        Intent intent = new Intent(MainActivity.this, SignUp.class);
+                        intent.putExtra("phone", user.getPhoneNumber());
+                        intent.putExtra("mail", user.getEmail());
+                        intent.putExtra("name", user.getDisplayName());
                         startActivity(intent);
                         finish();
                     }
                 }
             });
-            Intent intent = new Intent(this,Home_page.class);
-            Toast.makeText(this,"Signed In as "+user.getDisplayName(),Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, Home_page.class);
+            Toast.makeText(this, "Signed In as " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
     }
+
 }

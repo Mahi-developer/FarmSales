@@ -55,11 +55,11 @@ public class CustomAdapter extends BaseAdapter{
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.activity_listview, null);
+        ImageView image_view = (ImageView)view.findViewById(R.id.product_image);
+        getData(image_view,product_name.get(i));
         TextView name = (TextView) view.findViewById(R.id.product_name);
         TextView quantity = (TextView) view.findViewById(R.id.product_quantity);
         TextView price = (TextView) view.findViewById(R.id.product_price);
-        ImageView image_view = (ImageView)view.findViewById(R.id.product_image);
-        getData(image_view,product_name.get(i));
         name.setText(product_name.get(i));
         quantity.setText(product_quantity.get(i));
         price.setText("₹"+product_price.get(i));
