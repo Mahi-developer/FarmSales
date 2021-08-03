@@ -53,7 +53,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.hbb20.CountryCodePicker;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -181,9 +184,22 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = auth.getCurrentUser();
         if (user != null) {
             if (user.getDisplayName() != null) {
-                Intent intent = new Intent(this, Home_page.class);
-                Toast.makeText(this, "Signed In as " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
-                startActivity(intent);
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("users").document(user.getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                        if(value.toString().contains("Farmer")){
+                            Intent intent = new Intent(MainActivity.this, FarmerActivity.class);
+                            Toast.makeText(MainActivity.this, "Signed In as " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
+                        }else{
+                            Intent intent = new Intent(MainActivity.this, Home_page.class);
+                            Toast.makeText(MainActivity.this, "Signed In as " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
+                        }
+                    }
+                });
+
             } else if (user.getPhoneNumber() != null) {
                 Intent signUpIntent = new Intent(this, SignUp.class);
                 signUpIntent.putExtra("phone", user.getPhoneNumber());
@@ -229,9 +245,9 @@ public class MainActivity extends AppCompatActivity {
             db.collection("users").document(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     if (task.getResult().exists()) {
-                        Intent intent = new Intent(MainActivity.this, Home_page.class);
+                        Intent intent = new Intent(this, Home_page.class);
+                        Toast.makeText(this, "Signed In as " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
                         startActivity(intent);
-                        finish();
                     } else {
                         Intent intent = new Intent(MainActivity.this, SignUp.class);
                         intent.putExtra("phone", user.getPhoneNumber());
@@ -242,9 +258,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-            Intent intent = new Intent(this, Home_page.class);
-            Toast.makeText(this, "Signed In as " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
-            startActivity(intent);
+
         }
     }
 

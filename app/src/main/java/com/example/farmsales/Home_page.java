@@ -29,11 +29,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Home_page extends AppCompatActivity {
 
@@ -52,7 +56,7 @@ public class Home_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
           super.onCreate(savedInstanceState);
           setContentView(R.layout.activity_home_page);
-        new GetRates(location).execute();
+        getProducts(location);
         ImageButton userProfile = findViewById(R.id.user_profile);
         auth= FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
@@ -86,6 +90,39 @@ public class Home_page extends AppCompatActivity {
 
     }
 
+    private void getProducts(String location) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference();
+        reference.child("Products").child(location).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                    if(snapshot1.exists()){
+                        GenericTypeIndicator<Map<String,String>> to = new GenericTypeIndicator<Map<String,String>>() {};
+                        Map<String,String> products = snapshot1.getValue(to);
+                        for(String i : products.values()){
+                            if(i.contains("₹")){
+                                product_price.add(i);
+                            }else if(i.contains("Kg")){
+                                product_quantity.add(i);
+                            }else{
+                                product_name.add(i);
+                            }
+                        }
+                        setDataRates();
+                    }else{
+                        Toast.makeText(Home_page.this,"No Products Found in your Location",Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void createLocationDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(Home_page.this);
@@ -108,7 +145,7 @@ public class Home_page extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,int which) {
                         dialog.dismiss();
-                        new GetRates(location).execute();
+                        getProducts(location);
                     }
                 });
                 confirmationBuilder.show();
@@ -125,8 +162,9 @@ public class Home_page extends AppCompatActivity {
     }
 
     public void setDataRates(){
+        System.out.println(product_name.get(0));
         simpleList = (ListView) findViewById(R.id.list);
-        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), product_name, product_quantity, product_price);
+        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(),"Customer",location,product_name, product_quantity, product_price);
         simpleList.setAdapter(customAdapter);
 
     }
@@ -142,46 +180,48 @@ public class Home_page extends AppCompatActivity {
         });
     }
 
-    private class GetRates extends AsyncTask<Void,Void,Void> {
 
-        private String locate;
-        GetRates(String location){
-            this.locate = location.toLowerCase();
-        }
 
-        @Override
-        protected Void doInBackground(Void...n) {
-            try {
-                System.out.println("Location - "+locate);
-                String url = "https://rates.goldenchennai.com/vegetable-price/"+locate+"-vegetable-price-today/";
-                System.out.println("URL = "+url);
-                org.jsoup.nodes.Document doc = Jsoup.connect(url).get();
-                org.jsoup.select.Elements rows = doc.select("tr");
-                for (org.jsoup.nodes.Element row : rows) {
-                    org.jsoup.select.Elements columns = row.select("td");
-                    for (org.jsoup.nodes.Element column : columns) {
-                        product_data.add(column.text());
-                    }
-                }
-                for (int i = 0; i < product_data.size(); i = i + 3) {
-                    product_name.add(product_data.get(i));
-                }
-                for (int i = 1; i < product_data.size(); i = i + 3) {
-                    product_quantity.add(product_data.get(i));
-                }
-                for (int i = 2; i < product_data.size(); i = i + 3) {
-                    product_price.add(product_data.get(i));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void unused) {
-            super.onPostExecute(unused);
-            setDataRates();
-        }
-    }
+//    private class GetRates extends AsyncTask<Void,Void,Void> {
+//
+//        private String locate;
+//        GetRates(String location){
+//            this.locate = location.toLowerCase();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void...n) {
+//            try {
+//                System.out.println("Location - "+locate);
+//                String url = "https://rates.goldenchennai.com/vegetable-price/"+locate+"-vegetable-price-today/";
+//                System.out.println("URL = "+url);
+//                org.jsoup.nodes.Document doc = Jsoup.connect(url).get();
+//                org.jsoup.select.Elements rows = doc.select("tr");
+//                for (org.jsoup.nodes.Element row : rows) {
+//                    org.jsoup.select.Elements columns = row.select("td");
+//                    for (org.jsoup.nodes.Element column : columns) {
+//                        product_data.add(column.text());
+//                    }
+//                }
+//                for (int i = 0; i < product_data.size(); i = i + 3) {
+//                    product_name.add(product_data.get(i));
+//                }
+//                for (int i = 1; i < product_data.size(); i = i + 3) {
+//                    product_quantity.add(product_data.get(i));
+//                }
+//                for (int i = 2; i < product_data.size(); i = i + 3) {
+//                    product_price.add(product_data.get(i));
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void unused) {
+//            super.onPostExecute(unused);
+//            setDataRates();
+//        }
+//    }
 }

@@ -160,7 +160,7 @@ public class SignUp extends AppCompatActivity {
         userDetails.put("Email",Email);
         userDetails.put("Type",UserType);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users/"+UserType)
+        db.collection("users")
                 .document(uid)
                 .set(userDetails)
                 .addOnCompleteListener(task1 -> {
@@ -170,9 +170,15 @@ public class SignUp extends AppCompatActivity {
                                 .build();
                         user.updateProfile(request).addOnCompleteListener(task3 -> {
                             if(task3.isSuccessful()){
-                                Intent intent = new Intent(this,Home_page.class);
-                                startActivity(intent);
-                                finish();
+                                if(UserType.equals("Customer")){
+                                    Intent intent = new Intent(this,Home_page.class);
+                                    startActivity(intent);
+                                    finish();
+                                }else if(UserType.equals("Farmer")){
+                                    Intent intent = new Intent(this,FarmerActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
                             }else{
                                 Toast.makeText(this,"Some error occurred, retry login!",Toast.LENGTH_SHORT).show();
                                 finishAndRemoveTask();

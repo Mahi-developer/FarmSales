@@ -181,31 +181,23 @@
                 android:layout_marginBottom="5dp"
                 android:textSize="20sp"/>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <EditText
+                android:id="@+id/password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/transparent"
-                app:startIconDrawable="@drawable/ic_lock"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleDrawable="@drawable/ic_show_pass"
-                app:passwordToggleTint="?colorPrimaryVariant">
+                android:layout_height="50dp"
+                android:ems="20"
+                android:drawableStart="@drawable/ic_lock"
+                android:drawablePadding="10dp"
+                android:hint="@string/your_new_password"
+                android:textSize="18sp"
+                android:textColorHint="?colorPrimaryVariant"
+                android:textColor="?colorSecondary"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/edit_text_box"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                tools:ignore="RtlSymmetry" />
 
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:ems="20"
-                    android:hint="@string/your_new_password"
-                    android:textSize="18sp"
-                    android:textColorHint="?colorPrimaryVariant"
-                    android:textColor="?colorSecondary"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/edit_text_box"
-                    android:importantForAutofill="no"
-                    android:inputType="textPassword"
-                    tools:ignore="RtlSymmetry" />
-
-            </com.google.android.material.textfield.TextInputLayout>
             <TextView
                 android:fontFamily="@font/caros_light"
                 android:layout_width="wrap_content"

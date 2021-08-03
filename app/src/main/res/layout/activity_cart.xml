@@ -39,7 +39,7 @@
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/list_cart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/cart_r1"
@@ -60,22 +60,23 @@
             android:id="@+id/total_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1,489"
+            android:text=""
             android:textSize="20sp"
             android:textColor="?colorSecondary"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="25dp"
             android:layout_weight="1"/>
 
         <Button
+            android:id="@+id/place_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:text="Place Order"
             android:textColor="?colorSecondary"
-            android:background="@drawable/place_order_box"
-            android:layout_weight="1"
-            android:layout_marginEnd="15dp"/>
+            android:background="@color/transparent"
+            android:layout_marginEnd="7dp"
+            />
 
 
 
