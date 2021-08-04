@@ -42,8 +42,9 @@
         android:id="@+id/list_cart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/cart_l1"
         android:layout_below="@+id/cart_r1"
-        android:layout_above="@+id/cart_l1" />
+        android:divider="@android:color/transparent" />
 
 
     <LinearLayout

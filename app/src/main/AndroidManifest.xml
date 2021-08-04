@@ -17,7 +17,10 @@
         android:theme="@style/Theme.FarmSales"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
-        <activity android:name=".Payment"></activity>
+        <activity
+            android:name=".Dashboard"
+            android:exported="true" />
+        <activity android:name=".Payment" />
         <activity android:name=".SetPrice" />
         <activity android:name=".Cart" />
         <activity android:name=".Location" />

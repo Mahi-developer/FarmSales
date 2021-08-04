@@ -71,7 +71,7 @@ public class FarmerActivity extends AppCompatActivity {
         ImageButton cart = findViewById(R.id.cart_farmer);
         cart.setOnClickListener(l->
         {
-            Intent intent = new Intent(this,Cart.class);
+            Intent intent = new Intent(this,Dashboard.class);
             startActivity(intent);
         });
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -16,8 +16,6 @@ import java.util.ArrayList;
 public class Cart extends AppCompatActivity {
     private ListView simpleList;
 
-    private String productName,loc;
-    private String productPrice,productQuantity;
     private TextView name,quan;
     private EditText price;
     private ImageButton plus,minus;
@@ -33,13 +31,10 @@ public class Cart extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
         Intent in = getIntent();
-        productName = in.getStringExtra("name");
-        productPrice = in.getStringExtra("price");
-        productQuantity = in.getStringExtra("quan");
-        loc = in.getStringExtra("loc");
-        product_name.add(productName);
-        product_price.add(productPrice);
-        product_quantity.add(productQuantity);
+        product_name = in.getStringArrayListExtra("productName");
+        product_price = in.getStringArrayListExtra("productPrice");
+        product_quantity = in.getStringArrayListExtra("productQuantity");
+
 
         //hooks
         simpleList = findViewById(R.id.list_cart);
@@ -56,7 +51,7 @@ public class Cart extends AppCompatActivity {
 
         placeOrder.setOnClickListener(v->{
             Intent intent = new Intent(this,Payment.class);
-            intent.putExtra("total","₹"+sum);
+            intent.putExtra("total",sum);
             startActivity(intent);
         });
         back.setOnClickListener(v->{

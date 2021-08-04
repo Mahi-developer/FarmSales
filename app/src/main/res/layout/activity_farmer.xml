@@ -7,37 +7,38 @@
     tools:context=".Home_page"
     android:orientation="vertical">
 
-
     <RelativeLayout
+        android:id="@+id/r1_farmer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/r1_farmer"
         android:paddingTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/farmsales"
+            android:layout_marginStart="15dp"
             android:fontFamily="@font/caros_med"
+            android:text="@string/farmsales"
             android:textColor="?colorSecondary"
-            android:textSize="25sp"
-            android:layout_marginStart="15dp" />
+            android:textSize="25sp" />
+
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_search_24"
-            android:background="@color/transparent"
+            android:layout_marginEnd="25dp"
             android:layout_toStartOf="@+id/cart_farmer"
-            android:layout_marginEnd="25dp"/>
+            android:background="@color/transparent"
+            android:src="@drawable/ic_baseline_search_24" />
+
         <ImageButton
             android:id="@+id/cart_farmer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_shopping_cart_24"
-            android:background="@color/transparent"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="15dp"/>
+            android:layout_marginEnd="15dp"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_baseline_dashboard_24" />
 
     </RelativeLayout>
 
@@ -45,9 +46,9 @@
         android:id="@+id/list_farmer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/r1_farmer"
         android:layout_above="@+id/l1_farmer"
-        />
+        android:layout_below="@+id/r1_farmer"
+        android:divider="@android:color/transparent" />
 
 
     <LinearLayout
@@ -104,6 +105,4 @@
             />
 
     </LinearLayout>
-
-
 </RelativeLayout>

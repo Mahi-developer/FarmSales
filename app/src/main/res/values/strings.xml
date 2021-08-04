@@ -48,6 +48,8 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="label">Upi id</string>
+    <string name="cart_continue">Continue</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
@@ -56,4 +58,5 @@
     <string name="product">Product Quantity</string>
     <string name="product_name">Product name</string>
     <string name="_20">₹20</string>
+    <string name="amount_payable">Amount payable</string>
 </resources>

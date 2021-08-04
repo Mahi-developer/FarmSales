@@ -45,12 +45,14 @@ public class Home_page extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private ArrayList<String> product_data = new ArrayList<String>();
     private ArrayList<String> product_name = new ArrayList<String>();
-    private final ArrayList<String> product_quantity = new ArrayList<String>();
+    private ArrayList<String> product_quantity = new ArrayList<String>();
     private ArrayList<String> product_price = new ArrayList<String>();
+    private ArrayList<String> cart_product_name = new ArrayList<String>();
+    private ArrayList<String> cart_product_quantity = new ArrayList<String>();
+    private ArrayList<String> cart_product_price = new ArrayList<String>();
     private ListView simpleList;
     private final String[] location_list_item = {"Ambur","Arcot","Ariyalur","Chennai","Coimbatore","Cuddalore","Dharmapuri","Dindigul","Erode","Hosur","Jayankondam","Kallakurichi","Kanchipuram","Kanyakumari","Karaikudi","Karur","Kodaikanal","Kovilpatti","Krishnagiri","Kumbakonam","Madurai","Nagapattinam","Nagercoil","Namakkal","Ooty","Palani","Paramakudi","Perambalur","Pollachi","Pudukkottai","Ramanathapuram","Rameswaram","Salem","Sivagangai","Thanjavur","Theni","Tirunelveli","Tiruppur","Tiruvannamalai","Tiruvarur","Trichy","Tuticorin","Vellore","Villupuram","Virudhunagar"};
     private String location = "Vellore";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,10 +86,65 @@ public class Home_page extends AppCompatActivity {
         ImageButton cart = findViewById(R.id.cart);
         cart.setOnClickListener(l->
         {
-            Intent intent = new Intent(this,Cart.class);
-            startActivity(intent);
+            getData(new IsAvailableCallBack() {
+                @Override
+                public void onAvailableCallBack(boolean isAvailable) {
+                    if(isAvailable){
+                        Intent intent = new Intent(Home_page.this,Cart.class);
+                        intent.putStringArrayListExtra("productName",cart_product_name);
+                        intent.putStringArrayListExtra("productPrice",cart_product_price);
+                        intent.putStringArrayListExtra("productQuantity",cart_product_quantity);
+                        startActivity(intent);
+                    }
+
+                }
+            });
+
         });
 
+    }
+
+    private void getData(IsAvailableCallBack callBack) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
+
+
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+
+        databaseReference.child("Customer").child(user.getUid()).child("Cart").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int count = 0;
+                System.out.println("total count"+snapshot.getChildrenCount());
+                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                    if(snapshot1.exists()){
+                        GenericTypeIndicator<Map<String,String>> to = new GenericTypeIndicator<Map<String,String>>() {};
+                        Map<String,String> products = snapshot1.getValue(to);
+                        for(String i : products.values()){
+                            if(i.contains("₹")){
+                                cart_product_price.add(i);
+                            }else if(i.contains("Kg")){
+                                cart_product_quantity.add(i);
+                            }else{
+                                cart_product_name.add(i);
+                            }
+                        }
+                    }
+                    count++;
+                    System.out.println("Count"+count);
+                    if(count==snapshot.getChildrenCount()){
+                        callBack.onAvailableCallBack(true);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void getProducts(String location) {

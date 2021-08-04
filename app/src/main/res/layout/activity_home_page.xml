@@ -45,9 +45,9 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/r1"
         android:layout_above="@+id/l1"
-        />
+        android:layout_below="@+id/r1"
+        android:divider="@android:color/transparent" />
 
 
     <LinearLayout

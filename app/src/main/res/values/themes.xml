@@ -12,6 +12,16 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">#C5C5C5</item>
         <!-- Customize your theme here. -->
+
+        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="buttonBarPositiveButtonStyle"></item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+    <style name="postivebuttonstyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/com_facebook_blue</item>
     </style>
 
 <!--    <style name="full_screen_dialog">-->
