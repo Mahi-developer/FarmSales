@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
@@ -37,6 +38,7 @@ public class FarmerActivity extends AppCompatActivity {
     private ListView simpleList;
     private final String[] location_list_item = {"Ambur","Arcot","Ariyalur","Chennai","Coimbatore","Cuddalore","Dharmapuri","Dindigul","Erode","Hosur","Jayankondam","Kallakurichi","Kanchipuram","Kanyakumari","Karaikudi","Karur","Kodaikanal","Kovilpatti","Krishnagiri","Kumbakonam","Madurai","Nagapattinam","Nagercoil","Namakkal","Ooty","Palani","Paramakudi","Perambalur","Pollachi","Pudukkottai","Ramanathapuram","Rameswaram","Salem","Sivagangai","Thanjavur","Theni","Tirunelveli","Tiruppur","Tiruvannamalai","Tiruvarur","Trichy","Tuticorin","Vellore","Villupuram","Virudhunagar"};
     private String location = "Vellore";
+    private CustomAdapter customAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +70,11 @@ public class FarmerActivity extends AppCompatActivity {
             createLocationDialog();
         });
 
-        ImageButton cart = findViewById(R.id.cart_farmer);
-        cart.setOnClickListener(l->
+        ImageButton dash = findViewById(R.id.cart_farmer);
+        dash.setOnClickListener(l->
         {
             Intent intent = new Intent(this,Dashboard.class);
+            intent.putExtra("loc", location);
             startActivity(intent);
         });
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -80,12 +83,8 @@ public class FarmerActivity extends AppCompatActivity {
                 System.out.println("pos"+i);
             }
         });
-//        Intent intent = new Intent(FarmerActivity.this,SetPrice.class);
-//        intent.putExtra("name",product_name.get(i));
-//        intent.putExtra("price",product_price.get(i));
-//        intent.putExtra("quan",product_quantity.get(i));
-//        intent.putExtra("loc",location);
-//        startActivity(intent);
+
+
     }
 
     private void createLocationDialog() {
@@ -127,7 +126,7 @@ public class FarmerActivity extends AppCompatActivity {
     }
 
     public void setDataRates(){
-        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(),"Farmer",location,product_name, product_quantity, product_price);
+        customAdapter = new CustomAdapter(getApplicationContext(),"Farmer",location,product_name, product_quantity, product_price);
         simpleList.setAdapter(customAdapter);
     }
 
@@ -170,7 +169,7 @@ public class FarmerActivity extends AppCompatActivity {
                     product_quantity.add(product_data.get(i));
                 }
                 for (int i = 2; i < product_data.size(); i = i + 3) {
-                    product_price.add(product_data.get(i));
+                    product_price.add("₹"+product_data.get(i));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

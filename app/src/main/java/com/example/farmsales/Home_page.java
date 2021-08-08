@@ -77,8 +77,8 @@ public class Home_page extends AppCompatActivity {
             Picasso.get().load(photoUrl).into(userProfile);
         }
 
-        ImageButton location = findViewById(R.id.location);
-        location.setOnClickListener(l->
+        ImageButton locationbt = findViewById(R.id.location);
+        locationbt.setOnClickListener(l->
         {
             createLocationDialog();
         });
@@ -94,7 +94,11 @@ public class Home_page extends AppCompatActivity {
                         intent.putStringArrayListExtra("productName",cart_product_name);
                         intent.putStringArrayListExtra("productPrice",cart_product_price);
                         intent.putStringArrayListExtra("productQuantity",cart_product_quantity);
+                        intent.putExtra("location",location);
                         startActivity(intent);
+                        cart_product_name.clear();
+                        cart_product_price.clear();
+                        cart_product_quantity.clear();
                     }
 
                 }
@@ -113,7 +117,7 @@ public class Home_page extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
 
-        databaseReference.child("Customer").child(user.getUid()).child("Cart").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Customer").child(user.getUid()).child("Cart").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int count = 0;
@@ -125,7 +129,7 @@ public class Home_page extends AppCompatActivity {
                         for(String i : products.values()){
                             if(i.contains("₹")){
                                 cart_product_price.add(i);
-                            }else if(i.contains("Kg")){
+                            }else if(i.contains("Kg")||i.contains("Piece")||i.contains("Bunch")){
                                 cart_product_quantity.add(i);
                             }else{
                                 cart_product_name.add(i);
@@ -148,29 +152,50 @@ public class Home_page extends AppCompatActivity {
     }
 
     private void getProducts(String location) {
+        product_name.clear();
+        product_price.clear();
+        product_quantity.clear();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference();
         reference.child("Products").child(location).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snapshot1:snapshot.getChildren()){
-                    if(snapshot1.exists()){
-                        GenericTypeIndicator<Map<String,String>> to = new GenericTypeIndicator<Map<String,String>>() {};
-                        Map<String,String> products = snapshot1.getValue(to);
-                        for(String i : products.values()){
-                            if(i.contains("₹")){
-                                product_price.add(i);
-                            }else if(i.contains("Kg")){
-                                product_quantity.add(i);
-                            }else{
-                                product_name.add(i);
+                for(DataSnapshot snapshot2:snapshot.getChildren()){
+                    if(snapshot2.exists()){
+                        DatabaseReference reference1 = database.getReference();
+                        reference1.child("Products").child(location).child(snapshot2.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                                    if(snapshot1.exists()){
+                                        GenericTypeIndicator<Map<String,String>> to = new GenericTypeIndicator<Map<String,String>>() {};
+                                        Map<String,String> products = snapshot1.getValue(to);
+                                        for(String i : products.values()){
+                                            if(i.contains("₹")){
+                                                product_price.add(i);
+                                            }else if(i.contains("Kg")||i.contains("Piece")||i.contains("Bunch")){
+                                                product_quantity.add(i);
+                                            }else{
+                                                product_name.add(i);
+                                            }
+                                        }
+                                        setDataRates();
+                                    }else{
+                                        Toast.makeText(Home_page.this,"No Products Found in your Location",Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
                             }
-                        }
-                        setDataRates();
-                    }else{
-                        Toast.makeText(Home_page.this,"No Products Found in your Location",Toast.LENGTH_LONG).show();
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
                 }
+
             }
 
             @Override

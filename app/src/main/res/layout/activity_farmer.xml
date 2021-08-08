@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?colorPrimary"
-    tools:context=".Home_page"
+    tools:context=".FarmerActivity"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -23,13 +23,6 @@
             android:textColor="?colorSecondary"
             android:textSize="25sp" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="25dp"
-            android:layout_toStartOf="@+id/cart_farmer"
-            android:background="@color/transparent"
-            android:src="@drawable/ic_baseline_search_24" />
 
         <ImageButton
             android:id="@+id/cart_farmer"
@@ -83,7 +76,7 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_add_circle_outline_24"
+            android:src="@drawable/ic_baseline_favorite_24"
             android:background="@color/transparent"
             />
         <ImageButton

@@ -12,18 +12,28 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Payment extends AppCompatActivity {
 
     EditText noteEt;
-    String upi_id = "vickyvignesh1904@oksbi";
+    String upi_id = "9688443960@paytm";
     String name = "Vicky Vignesh";
     TextView total_amount, order_id,sum;
     Button pay_now;
+    RadioGroup group;
+    RadioButton radio1,radio2;
 
     final int UPI_PAYMENT = 0;
 
@@ -38,25 +48,52 @@ public class Payment extends AppCompatActivity {
         String total_value = String.valueOf(total);
         sum.setText(total_value);
 
-
-
-
         initializeViews();
+
+        Random random = new Random();
+        Long rand = random.nextLong();
+        order_id.setText("Order Id: "+""+rand);
+
+        group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                radio1 = findViewById(checkedId);
+                System.out.println(checkedId);
+            }
+        });
+
 
         pay_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(radio1.getText().toString().equals("Pay using UPI ID")){
+                    String note = rand.toString();
+                    System.out.println(total_value);
+                    payUsingUpi(total_value, upi_id, name, note);
+                }
+                else{
+                    Toast.makeText(Payment.this,"Your Order placed successfully",Toast.LENGTH_LONG).show();
+                    deleteDb();
+                }
                 //Getting the values from the EditTexts
-                String note = order_id.getText().toString();
-                payUsingUpi(total_value, upi_id, name, note);
             }
         });
+    }
+
+    private void deleteDb() {
+        finish();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference  = database.getReference().child("Customer").child(user.getUid()).child("Cart");
+        databaseReference.removeValue();
     }
 
     void initializeViews() {
         pay_now = findViewById(R.id.cart_continue);
         total_amount = findViewById(R.id.total_amount);
         order_id = findViewById(R.id.order_id);
+        group = findViewById(R.id.group);
     }
 
     void payUsingUpi(String amount, String upiId, String name, String note) {
@@ -138,7 +175,9 @@ public class Payment extends AppCompatActivity {
 
             if (status.equals("success")) {
                 //Code to handle successful transaction here.
-                Toast.makeText(Payment.this, "Transaction successful.", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Payment.this, "Transaction successful.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Payment.this,"Your Order placed successfully",Toast.LENGTH_LONG).show();
+                deleteDb();
                 Log.d("UPI", "responseStr: " + approvalRefNo);
             } else if ("Payment cancelled by user.".equals(paymentCancel)) {
                 Toast.makeText(Payment.this, "Payment cancelled by user.", Toast.LENGTH_SHORT).show();

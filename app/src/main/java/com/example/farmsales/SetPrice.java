@@ -60,7 +60,7 @@ public class SetPrice extends AppCompatActivity {
 
 
         name.setText(productName);
-        price.setText("₹"+productPrice);
+        price.setText(productPrice);
         quan.setText(productQuantity);
         new CustomAdapter().getData(imgView,productName);
 
@@ -70,13 +70,15 @@ public class SetPrice extends AppCompatActivity {
                 System.out.println(price.getText().toString());
                 int updatePrice = (int) Math.round(Double.valueOf(price.getText().toString().replace("₹","")));
                 if(updatePrice <= maxPrice && updatePrice >= minPrice){
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    FirebaseUser user = auth.getCurrentUser();
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference ref = database.getReference();
                     Map<String, String> products = new HashMap<>();
                     products.put("productName",productName);
                     products.put("productPrice",price.getText().toString());
                     products.put("productQuantity",quan.getText().toString());
-                    ref.child("Products").child(loc).child(productName).setValue(products).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    ref.child("Products").child(loc).child(user.getUid()).child(productName).setValue(products).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             finish();

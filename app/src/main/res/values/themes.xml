@@ -17,10 +17,17 @@
     </style>
 
     <style name="AlertDialogTheme" parent="Theme.MaterialComponents.Dialog.Alert">
-        <item name="buttonBarPositiveButtonStyle"></item>
-        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:background">@color/white</item>
+        <item name="buttonBarPositiveButtonStyle">@style/postivebuttonstyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/negativebuttonstyle</item>
+        <item name="android:textColorPrimary">@color/black</item>
     </style>
+
     <style name="postivebuttonstyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/com_facebook_blue</item>
+    </style>
+
+    <style name="negativebuttonstyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/com_facebook_blue</item>
     </style>
 

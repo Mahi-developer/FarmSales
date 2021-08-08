@@ -2,8 +2,6 @@ package com.example.farmsales;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Icon;
-import android.icu.util.ULocale;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +27,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CustomAdapter extends BaseAdapter{
 
@@ -38,6 +37,7 @@ public class CustomAdapter extends BaseAdapter{
     ArrayList<String> product_price;
     LayoutInflater inflter;
     String type,location;
+
 
 
     public CustomAdapter(){
@@ -77,7 +77,18 @@ public class CustomAdapter extends BaseAdapter{
         }else{
             view = inflter.inflate(R.layout.activity_listview, null);
         }
-
+        ImageButton fav = view.findViewById(R.id.favorite);
+        AtomicBoolean isFav = new AtomicBoolean(false);
+        fav.setOnClickListener(v->{
+            if(!isFav.get()){
+                fav.setImageResource(R.drawable.red_fav);
+                isFav.set(true);
+            }
+            else{
+                fav.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                isFav.set(false);
+            }
+        });
         ImageView image_view = (ImageView)view.findViewById(R.id.product_image);
         getData(image_view,product_name.get(i));
         TextView name = (TextView) view.findViewById(R.id.product_name);
@@ -86,7 +97,7 @@ public class CustomAdapter extends BaseAdapter{
         ImageButton img = (ImageButton)view.findViewById(R.id.buttoncl);
         name.setText(product_name.get(i));
         quantity.setText(product_quantity.get(i));
-        price.setText("₹"+product_price.get(i));
+        price.setText(product_price.get(i));
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
